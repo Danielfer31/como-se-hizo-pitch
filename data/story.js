@@ -16,7 +16,7 @@ window.STORY = {
   ],
   /* Voces: audios en assets/voces/<persona>/<vineta>_<paso>.mp3 (ver voces_guion.md).
      Una voz solo suena si su persona la autorizó por escrito: poner true aquí. sintetica: true si es clon. */
-  voces: { carpeta: "assets/voces/", formato: "mp3", sintetica: true, autorizadas: { daniel: true, hector: true, victor: true } },
+  voces: { carpeta: "assets/voces/", formato: "mp3", sintetica: false, autorizadas: { daniel: false, hector: false, victor: false } },
   pasos: ["Historia", "Prompt", "Resultado", "Decisión"],
   carriles: [
     { id: "podcast", nombre: "Podcast", color: "#0B7A75" },
