@@ -235,6 +235,7 @@ window.STORY = {
   ],
   enlaces: [
     { texto: "Cómic «Lo que el río sabe»", url: "https://danielfer31.github.io/lo-que-el-rio-sabe/" },
-    { texto: "Podcast «Aprender entre pantallas»", url: "https://danielfer31.github.io/aprender-entre-pantallas/" }
+    { texto: "Podcast «Aprender entre pantallas»", url: "https://danielfer31.github.io/aprender-entre-pantallas/" },
+    { texto: "Video «Después del cómic» (YouTube)", url: "https://youtu.be/p3Q1eOJTzLE" }
   ]
 };
