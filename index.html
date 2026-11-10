@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo se hizo · Pitch transmedia</title>
+<meta name="description" content="La historia de cómo se crearon el podcast, el cómic y el video del proyecto transmedia, contada por sus protagonistas y con las pruebas de cada decisión.">
+<meta name="theme-color" content="#FBF6EC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231E1A16'/%3E%3Ccircle cx='11' cy='16' r='4.5' fill='%230B7A75'/%3E%3Ccircle cx='21' cy='16' r='4.5' fill='%23E8A93A'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/vinetas/p0.jpg">
+<link rel="stylesheet" href="styles.css?v=10">
+</head>
+<body>
+<a class="skip" href="#story">Saltar al relato</a>
+<a class="skip skip-2" href="#transcripcion">Leer el relato completo como texto</a>
+
+<header class="bar" id="trace" aria-label="Línea de trazabilidad del proceso">
+  <div class="bar-row">
+    <a class="brand" href="#portada" aria-label="Cómo se hizo, ir a la portada"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span><span>Cómo se hizo</span></a>
+    <div class="rails" id="rails" role="group" aria-label="Tres piezas, tres líneas de tiempo"></div>
+    <div class="tools">
+      <button type="button" class="tool" id="btn-voice" aria-pressed="false" title="Voz sintética (ElevenLabs), clonada con autorización" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/></svg><span class="lbl">Voz</span>
+      </button>
+      <button type="button" class="tool" id="btn-essential" aria-pressed="false" title="Recorrido esencial: solo la historia de cada viñeta (E)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h5"/></svg><span class="lbl">Esencial</span>
+      </button>
+      <button type="button" class="tool" id="btn-proj" aria-pressed="false" title="Modo proyector: letra grande y fondo oscuro (P)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg><span class="lbl">Proyector</span>
+      </button>
+      <button type="button" class="tool" id="btn-index" aria-expanded="false" aria-controls="index-panel" title="Índice de viñetas (I)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="7" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="5" cy="17" r="1.2"/><path d="M9 7h11M9 12h11M9 17h11"/></svg><span class="lbl">Índice</span>
+      </button>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+  <nav id="index-panel" class="index" hidden aria-label="Índice de viñetas"></nav>
+</header>
+
+<main id="main">
+  <!-- ============ PORTADA ============ -->
+  <section class="hero" id="portada" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-in">
+      <div class="hero-copy">
+        <p class="kicker">Pitch transmedia · Transmedia y Contenidos Digitales con IA</p>
+        <h1 id="hero-title"><span>Cómo</span> <span>se hizo</span></h1>
+        <p class="lead" id="hero-sub"></p>
+        <ul class="ribbon" id="ribbon" aria-label="Las tres piezas"></ul>
+        <div class="cta">
+          <a class="btn primary" href="#story" id="btn-start">Empezar el recorrido</a>
+          <button type="button" class="btn ghost" id="btn-start-ess">Recorrido esencial</button>
+        </div>
+        <p class="hint">Desplázate o usa <kbd>↓</kbd> <kbd>Espacio</kbd>. Cada viñeta se cuenta en cuatro pasos: la historia, el <strong>prompt</strong>, el <strong>resultado</strong> y la <strong>decisión</strong>. Los personajes prestan su voz al relato; las citas son literales, pero quién las dice en pantalla es ilustrativo: las ideas fueron de los tres. Las voces son sintéticas (clonadas con ElevenLabs, con autorización de sus dueños); el reparto de líneas es ilustrativo y no atribuye aportes.</p>
+      </div>
+      <div class="hero-cast" id="hero-cast" aria-label="El equipo"></div>
+    </div>
+  </section>
+
+  <!-- ============ ESCENA PEGAJOSA ============ -->
+  <section class="story" id="story" aria-label="El relato en viñetas" tabindex="-1">
+    <div class="stage" id="stage" role="group" aria-roledescription="escena" aria-label="Viñeta actual">
+      <div class="wash" aria-hidden="true"></div>
+      <div class="dots" aria-hidden="true"></div>
+      <div class="stage-in">
+        <div class="left">
+          <figure class="frame" id="frame">
+            <div class="art" id="art">
+              <img class="cur" id="img-a" width="1536" height="1024" alt="" decoding="async">
+              <img id="img-b" width="1536" height="1024" alt="" decoding="async">
+            </div>
+            <span class="badge">Ilustración IA</span>
+            <div class="quote" id="quote" hidden></div>
+            <div class="polas" id="polas"></div>
+          </figure>
+          <div class="cast" id="cast" aria-hidden="true"></div>
+        </div>
+        <div class="right">
+          <div class="meta-top"><span class="act" id="st-act"></span><span class="count" id="st-count"></span></div>
+          <h2 id="st-title"></h2>
+          <div class="bubble" id="bubble" aria-live="polite" aria-atomic="true">
+            <div class="chip"><span id="chip-text"></span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <p class="say" id="say"></p>
+            <p class="when" id="when"></p>
+          </div>
+          <ol class="steps" id="steps" aria-label="Pasos de la viñeta"></ol>
+        </div>
+      </div>
+      <p class="cue" id="cue">Avanza con <kbd>↓</kbd> o desliza</p>
+    </div>
+    <div class="scroller" id="scroller" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============ CIERRE ============ -->
+  <section class="outro" id="resumen" aria-labelledby="outro-title">
+    <div class="outro-in">
+      <p class="kicker">Cierre</p>
+      <h2 id="outro-title">Qué hizo la IA y qué decidimos nosotros</h2>
+      <div class="cards" id="tabla-ia"></div>
+
+      <div class="finale">
+        <figure class="qr"><img src="assets/qr_comic.png" alt="Código QR que abre el cómic «Lo que el río sabe»" width="180" height="180" loading="lazy"><figcaption>Escanea para leer el cómic</figcaption></figure>
+        <div class="finale-txt">
+          <h3>Sigue el hilo</h3>
+          <p>Cada pieza tiene su propia puerta. El cómic es la historia; el podcast, la conversación; el video, lo que Mariana aprendió después.</p>
+          <ul class="links" id="enlaces"></ul>
+        </div>
+        <div class="finale-cast" id="finale-cast" aria-hidden="true"></div>
+      </div>
+
+      <details class="transcript" id="transcripcion">
+        <summary>Leer el relato completo como texto</summary>
+        <div id="transcript-body"></div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p><strong>Transparencia.</strong> Las ilustraciones de los personajes y de las viñetas están generadas con IA (Codex/ChatGPT); los rostros del equipo se inspiran en retratos del podcast y se usan con su autorización. Los personajes prestan su voz al relato: el reparto de quién «habla» en cada paso y de quién dice cada cita es ilustrativo: las ideas fueron de los tres. Las citas son literales del trabajo del equipo. Las capturas y fotogramas rotulados como «real» son material del proceso. El barrio, el caño y los datos del cómic son ficticios. Fuentes: sesiones de trabajo con Codex y Claude Code, sin credenciales ni datos personales.</p>
+  <p>Las voces son sintéticas (clonadas con ElevenLabs, con autorización de sus dueños); el reparto de líneas es ilustrativo y no atribuye aportes.</p>
+</footer>
+
+<dialog id="lightbox" aria-label="Evidencia ampliada">
+  <form method="dialog"><button class="close" aria-label="Cerrar evidencia">Cerrar ✕</button></form>
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+</dialog>
+
+<script src="data/story.js?v=7"></script>
+<script src="app.js?v=8"></script>
+</body>
+</html>
